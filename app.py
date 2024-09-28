@@ -9,6 +9,7 @@ from PIL import Image
 from transformers import ViTFeatureExtractor, ViTModel
 import torch
 import io
+import PaginaInicial
 
 app = Flask(__name__)
 
@@ -92,8 +93,8 @@ def euclidean_distance(v1, v2):
     return sum((i - j) ** 2 for i, j in zip(v1, v2)) ** 0.5
 
 @app.route("/")
-def hello():
-    return "Hello World!"
+def initial():
+    return PaginaInicial.render_pagina_inicial()
 
 if __name__ == "__main__":
     app.run()
