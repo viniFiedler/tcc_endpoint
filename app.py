@@ -15,8 +15,8 @@ app = Flask(__name__)
 REGISTROS_FILE = 'registros.json'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
-feature_extractor = ViTFeatureExtractor.from_pretrained('google/vit-base-patch16-224')
-model = ViTModel.from_pretrained('google/vit-base-patch16-224')
+feature_extractor = ViTFeatureExtractor.from_pretrained('models--viniFiedler--vit-base-patch16-224-finetuned-eurosat')
+model = ViTModel.from_pretrained('models--viniFiedler--vit-base-patch16-224-finetuned-eurosat')
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS

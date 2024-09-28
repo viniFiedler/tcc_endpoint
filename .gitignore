@@ -1,0 +1,15 @@
+# Ignorar arquivos de log
+*.log
+
+# Ignorar pastas __pycache__
+__pycache__/
+
+# Ignorar arquivo app.py.save
+app.py.save
+
+# Ignorar pasta models--viniFiedler--vit-base-patch16-224-finetuned-eurosat
+models--viniFiedler--vit-base-patch16-224-finetuned-eurosat/
+
+# Ignorar arquivos .json
+*.json
+
