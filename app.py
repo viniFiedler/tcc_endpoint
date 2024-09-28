@@ -1,3 +1,6 @@
+import os
+os.environ["HF_HOME"] = "/tmp"
+
 from flask import Flask, jsonify, request
 import os
 import uuid
