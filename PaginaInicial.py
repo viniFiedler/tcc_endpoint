@@ -37,7 +37,7 @@ def render_pagina_inicial():
 
     <div class="container">
         <h1 class="text-center">API Documentation</h1>
-        <p class="lead text-center">A simple API to manage images and records.</p>
+        <p class="lead text-center">Endpoints da API.</p>
 
         <!-- Endpoint: Register -->
         <div class="endpoint">
@@ -88,7 +88,7 @@ def render_pagina_inicial():
         <!-- Endpoint: Verify by ID -->
         <div class="endpoint">
             <h2>Verify Image by ID</h2>
-            <p><span class="method">GET</span> <strong>/verificar?id=</strong></p>
+            <p><span class="method">POST</span> <strong>/verificar?id=</strong></p>
             <p>This endpoint allows you to check if an image matches a specific record by ID.</p>
 
             <h5>Request Parameters:</h5>
