@@ -107,6 +107,47 @@ def identificar():
     else:
         return jsonify({"error": "Extensão de arquivo não permitida."}), 400
 
+@app.route('/verificar', methods=['POST'])
+def verificar():
+    """
+    Rota para verificar se uma imagem corresponde a um registro específico informado por ID.
+    """
+    if 'file' not in request.files or 'id' not in request.form:
+        return jsonify({"error": "Imagem e ID do registro são necessários."}), 400
+
+    file = request.files['file']
+    registro_id = request.form.get('id')
+
+    if file and allowed_file(file.filename):
+        image = Image.open(io.BytesIO(file.read()))
+
+        # Segmenta a imagem com YOLO
+        segmentada = segmenta_imagem_yolo(image)
+
+        if segmentada is None:
+            return jsonify({"error": "Nenhum cachorro detectado na foto."}), 400
+
+        # Extrair o vetor de características da imagem segmentada
+        feature_vector = extract_feature_vector(segmentada)
+
+        registros = load_registros()
+        registro_encontrado = next((r for r in registros if r["id"] == registro_id), None)
+
+        if not registro_encontrado:
+            return jsonify({"error": f"Nenhum registro encontrado com o ID: {registro_id}."}), 400
+
+        # Comparar com o vetor de características do registro
+        distancia = euclidean_distance(feature_vector, registro_encontrado['feature_vector'])
+
+        return jsonify({
+            "message": "Verificação realizada",
+            "id": registro_id,
+            "distancia": distancia,
+            "verificacao": "Correspondente" if distancia < 1.0 else "Não correspondente"
+        }), 200
+    else:
+        return jsonify({"error": "Extensão de arquivo não permitida."}), 400
+
 def load_registros():
     """
     Carrega os registros existentes do arquivo JSON.
